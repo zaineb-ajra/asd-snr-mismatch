@@ -33,7 +33,7 @@
    & multi & 87{,}4\,$\pm$\,0{,}4 [86{,}4\,; 88{,}2] & 90{,}7\,$\pm$\,0{,}7 [90{,}0\,; 91{,}4] & 92{,}2\,$\pm$\,1{,}1 [91{,}5\,; 92{,}9] \\
   \hline
   \end{tabular}
-  \caption{AUC (\%) sur la partition principale de MIMII. Lignes : RSB d'entraînement (dB) ; colonnes : RSB de test. Moyenne $\pm$ écart-type sur trois graines (aléa d'entraînement) et, entre crochets, intervalle de confiance à 95\,\% par bootstrap à tirages communs (échantillonnage des extraits de test). En gras : cellules appariées. Un $\Delta$AUC est la différence avec la cellule en gras de la même colonne. EAT + kNN est déterministe (écart-type nul). Multi : un modèle entraîné aux trois RSB avec le même nombre de pas d'optimisation.}
+  \caption{AUC (\%) des cinq modèles sur la partition principale de MIMII, selon le RSB d'entraînement (lignes, en dB) et le RSB de test (colonnes). Moyenne $\pm$ écart-type sur trois graines et, entre crochets, intervalle de confiance à 95\,\% par bootstrap à tirages communs (échantillonnage des extraits de test). En gras : cellules appariées, où l'entraînement et le test ont le même RSB. Un $\Delta$AUC est la différence avec la cellule en gras de la même colonne. EAT + kNN ne comporte aucun aléa (écart-type nul). Multi : modèle entraîné aux trois RSB, avec le même nombre de pas d'optimisation.}
   \label{tab:auc}
  \end{center}
 \end{table}

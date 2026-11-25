@@ -14,13 +14,15 @@ provides the same recordings at three SNRs (−6, 0 and +6 dB): each model is
 trained at one of them (or at all three, multi-condition training) and evaluated
 at all three.
 
-| Family | Model | Original code |
-|---|---|---|
-| Reconstruction | Autoencoder (MIMII baseline) | [MIMII-hitachi/mimii_baseline](https://github.com/MIMII-hitachi/mimii_baseline) |
-| Machine-ID classifier | MobileNetV2 (DCASE 2022 baseline) | [Kota-Dohi/dcase2022_task2_baseline_mobile_net_v2](https://github.com/Kota-Dohi/dcase2022_task2_baseline_mobile_net_v2) |
-| Angular margin | Wilkinghoff, SSL / FeatEx | [wilkinghoff/ssl4asd](https://github.com/wilkinghoff/ssl4asd) (re-implemented from the paper, no code used) |
-| Contrastive | OS-SCL | [huangswt/OS-SCL](https://github.com/huangswt/OS-SCL) |
-| Frozen pretrained encoder + kNN | EAT + kNN | [cwx-worst-one/EAT](https://github.com/cwx-worst-one/EAT) |
+| Family | Model | Reference code | Our implementation |
+|---|---|---|---|
+| Reconstruction | Autoencoder (MIMII baseline) | [MIMII-hitachi/mimii_baseline](https://github.com/MIMII-hitachi/mimii_baseline) | Re-implemented from the paper (no code copied) |
+| Machine-ID classifier | MobileNetV2 (DCASE 2022 baseline) | [Kota-Dohi/dcase2022_task2_baseline_mobile_net_v2](https://github.com/Kota-Dohi/dcase2022_task2_baseline_mobile_net_v2) | Ported to PyTorch |
+| Angular margin | Wilkinghoff, SSL / FeatEx | [wilkinghoff/ssl4asd](https://github.com/wilkinghoff/ssl4asd) | Re-implemented from the paper (no code used); partly validated |
+| Contrastive | OS-SCL | [huangswt/OS-SCL](https://github.com/huangswt/OS-SCL) | Re-implemented from the paper (no code used); does not reach the published level |
+| Frozen pretrained encoder + kNN | EAT + kNN | [cwx-worst-one/EAT](https://github.com/cwx-worst-one/EAT) | Encoder partly vendored (see License) |
+
+Validation of each implementation: [`docs/validation.md`](docs/validation.md).
 
 ## Citation
 
@@ -67,13 +69,14 @@ source .venv-paper/bin/activate
 pip install -r requirements-paper.txt
 pip install -e . --no-deps
 python scripts/paper_figures.py
-git status --short results/paper   # empty output: both files are regenerated identically
+git status --short results/paper   # empty output expected: same table and figure as in the paper
 ```
 
 `scripts/paper_figures.py` reads `results/aggregated/aggregated.csv` and
 `results/aggregated/bootstrap_intervals_main.csv` and writes
 `results/paper/tab_auc.tex` (Table 1) and `results/paper/fig_pertes.pdf`
 (Figure 1). The table and figure are in French, as in the paper.
+The figure PDF is zlib-compressed: with another Python build its bytes may differ while the drawing is the same.
 
 ## Full reproduction
 
@@ -217,7 +220,7 @@ Tests that need a GPU or the MIMII data on disk are skipped when these are absen
 
 | Paper | Files and scripts |
 |---|---|
-| §2 Related work: the MIMII part of the DCASE 2020 development set is channel 0 of MIMII at −6 dB (CRC-32) | `metadata/dcase2020_mimii_mapping.csv`, `metadata/dcase2020_other_snrs_check.csv`, `noisemismatch/data/dcase2020.py`, `docs/data.md` |
+| §2 Related work and §3 Data: the MIMII part of the DCASE 2020 development set is channel 0 of MIMII at −6 dB (CRC-32) | `metadata/dcase2020_mimii_mapping.csv`, `metadata/dcase2020_other_snrs_check.csv`, `noisemismatch/data/dcase2020.py`, `docs/data.md` |
 | §3 Data and recording identity: content-based pairing, 15,180 identities, exclusion of valve id_00 | `noisemismatch/data/matching.py`, `pairing.py`, `identity.py`, `metadata/mimii_identity.csv`, `metadata/mimii_pairing_content.csv`, `metadata/mimii_inventory.csv`, `docs/data.md`, `docs/data_tables.md` |
 | §3 Split: main split (14,360 identities: 8,778 training, 5,582 test), sensitivity split, strict variant (368 test identities removed) | `noisemismatch/data/split.py`, `build_split.py`, `metadata/mimii_split.csv`, `metadata/mimii_split_sensitivity.csv`, `metadata/mimii_split_summary.csv`, `configs/protocol.yaml` |
 | §3 Models and validation of the implementations | `noisemismatch/models/`, `noisemismatch/features/`, `configs/models/*.yaml`, `docs/deviations.md`, `docs/validation.md`, `results/verification/`, `results/dcase2020_check.md`, `metadata/published/` |
@@ -225,8 +228,8 @@ Tests that need a GPU or the MIMII data on disk are skipped when these are absen
 | §4 Results, Table 1 | `results/paper/tab_auc.tex` ← `scripts/paper_figures.py` ← `results/aggregated/aggregated.csv`, `bootstrap_intervals_main.csv` |
 | §4 Results, Figure 1 (AUC points lost at 12 dB of mismatch and by the multi-condition model) | `results/paper/fig_pertes.pdf` ← `scripts/paper_figures.py` ← `results/aggregated/bootstrap_intervals_main.csv` |
 | §4 Train/test matrix, direction of the mismatch, multi-condition training | `results/aggregated/bootstrap_intervals_main.csv`, `delta_main_*.csv`, `summary_main_*.csv`, `results/study_report.md` |
-| §5 Fragility and robustness checks: error ratios, strict variant, without fan id_00, sensitivity split, pAUC | `results/aggregated/error_ratio_main_auc.csv`, `*_strict_*.csv`, `*_fan_without_id_00_*.csv`, `*_sensitivity_*.csv`, `bootstrap_intervals_*.csv`, `per_id_*.csv`, `results/study_report.md` |
-| §6 Discussion and conclusion | `results/aggregated/bootstrap_intervals_main.csv`, `results/study_report.md`, `docs/validation.md`, `results/verification/` |
+| §5 Robustness checks: strict variant (and the 527 training identities meeting the same criteria), without fan id_00, sensitivity split, pAUC | `docs/protocol.md` (Amendment 2), `*_strict_*.csv`, `*_fan_without_id_00_*.csv`, `*_sensitivity_*.csv`, `bootstrap_intervals_*.csv`, `per_id_*.csv`, `results/study_report.md` |
+| §6 Discussion and conclusion; share of the matched model's distance to chance (AUC − 50) lost at 12 dB, computed from Table 1 after the results | `results/paper/tab_auc.tex`, `results/aggregated/bootstrap_intervals_main.csv`, `results/study_report.md`, `docs/validation.md`, `results/verification/` |
 
 ## Repository layout
 
