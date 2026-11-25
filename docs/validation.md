@@ -341,7 +341,7 @@ is relaxed to allow a comparison.
 a dated analysis posterior to the results (protocol freeze rule). It reopens the
 decision of 2026-09-30 above (no comparison with the published numbers) for this
 diagnostic only. Arms, criterion and consequences are fixed in this note,
-committed before any run. No other run is made without the team's agreement.
+committed before any run.
 **The results of the main study do not change, whatever the outcome.**
 
 **Why.** Trained and tested at −6 dB, our OS-SCL reaches 87.3 AUC (mean of the

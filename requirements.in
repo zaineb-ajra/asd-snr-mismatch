@@ -1,4 +1,4 @@
-# Top-level runtime dependencies (human-edited).
+# Top-level runtime dependencies (edited by hand).
 # The pinned, fully resolved set lives in requirements.txt and is regenerated with:
 #   uv pip compile requirements.in --torch-backend cu128 --python-version 3.10 \
 #       --emit-index-url -o requirements.txt

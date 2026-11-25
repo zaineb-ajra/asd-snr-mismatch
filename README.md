@@ -57,6 +57,7 @@ Validation of each implementation: [`docs/validation.md`](docs/validation.md).
 
 Not included: MIMII audio (download it from Zenodo, below), trained models and
 checkpoints, per-run outputs (per-clip scores, logs).
+Commit identifiers cited in `docs/` and `results/` refer to the development history, which is not part of this repository.
 
 ## Regenerate Table 1 and Figure 1 from the provided CSVs (no GPU, no data)
 
@@ -228,7 +229,7 @@ Tests that need a GPU or the MIMII data on disk are skipped when these are absen
 | §4 Results, Table 1 | `results/paper/tab_auc.tex` ← `scripts/paper_figures.py` ← `results/aggregated/aggregated.csv`, `bootstrap_intervals_main.csv` |
 | §4 Results, Figure 1 (AUC points lost at 12 dB of mismatch and by the multi-condition model) | `results/paper/fig_pertes.pdf` ← `scripts/paper_figures.py` ← `results/aggregated/bootstrap_intervals_main.csv` |
 | §4 Train/test matrix, direction of the mismatch, multi-condition training | `results/aggregated/bootstrap_intervals_main.csv`, `delta_main_*.csv`, `summary_main_*.csv`, `results/study_report.md` |
-| §5 Robustness checks: strict variant (and the 527 training identities meeting the same criteria), without fan id_00, sensitivity split, pAUC | `docs/protocol.md` (Amendment 2), `*_strict_*.csv`, `*_fan_without_id_00_*.csv`, `*_sensitivity_*.csv`, `bootstrap_intervals_*.csv`, `per_id_*.csv`, `results/study_report.md` |
+| §5 Robustness checks: strict variant (and the 527 training identities meeting the same criteria), without fan id_00, sensitivity split, pAUC | `docs/protocol.md` (Amendment 2), `results/aggregated/*_strict_*.csv`, `*_fan_without_id_00_*.csv`, `*_sensitivity_*.csv`, `bootstrap_intervals_*.csv`, `per_id_*.csv`, `results/study_report.md` |
 | §6 Discussion and conclusion; share of the matched model's distance to chance (AUC − 50) lost at 12 dB, computed from Table 1 after the results | `results/paper/tab_auc.tex`, `results/aggregated/bootstrap_intervals_main.csv`, `results/study_report.md`, `docs/validation.md`, `results/verification/` |
 
 ## Repository layout
