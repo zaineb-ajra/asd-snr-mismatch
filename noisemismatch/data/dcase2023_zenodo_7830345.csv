@@ -1,0 +1,8 @@
+filename,snr_db,machine_type,size_bytes,md5
+eval_data_ToyDrone_train.zip,0,ToyDrone,472616661,7fea367d1384a1521ae24f72203238de
+eval_data_ToyNscale_train.zip,0,ToyNscale,143696538,9332822f3e47afd984c01f2ecb5ca3af
+eval_data_ToyTank_train.zip,0,ToyTank,205703508,b1fd3ab7de7561290df2d477de1c9d33
+eval_data_Vacuum_train.zip,0,Vacuum,356878475,1c8de33d9a8c7850a1f7aaddb97d87be
+eval_data_bandsaw_train.zip,0,bandsaw,270588294,9274dfe63de028743823f1123f8b4b47
+eval_data_grinder_train.zip,0,grinder,268695075,17569c1f9df23621a0dbabc430684a35
+eval_data_shaker_train.zip,0,shaker,268555961,35f821b5645b731fb5a1750e33b95fc3

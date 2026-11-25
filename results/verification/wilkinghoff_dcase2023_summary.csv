@@ -1,0 +1,11 @@
+set,metric,mean,std,n
+dev,auc_mixed,69.179,1.357,5
+dev,auc_source_official,74.420,1.258,5
+dev,auc_source_restricted,69.125,1.814,5
+dev,auc_target_official,63.132,2.815,5
+dev,auc_target_restricted,68.975,2.211,5
+dev,pauc_mixed,57.724,0.710,5
+dev,pauc_source_official,63.923,0.394,5
+dev,pauc_source_restricted,62.548,0.728,5
+dev,pauc_target_official,56.082,1.291,5
+dev,pauc_target_restricted,56.154,1.662,5

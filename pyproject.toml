@@ -1,0 +1,89 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "noisemismatch"
+dynamic = ["version"]
+description = "Train/test noise-level mismatch in unsupervised anomalous sound detection on MIMII."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "LICENSES/*", "THIRD_PARTY_NOTICES.md"]
+requires-python = ">=3.10"
+# Exact, tested versions are pinned in requirements.txt / requirements-dev.txt.
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "scikit-learn",
+    "pyyaml",
+    "soundfile",
+    "librosa",
+    "tqdm",
+    "matplotlib",
+    "torch",
+    "torchaudio",
+    "torchvision",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "black"]
+
+[tool.setuptools.dynamic]
+version = { attr = "noisemismatch.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["noisemismatch*"]
+
+[tool.setuptools.package-data]
+"noisemismatch.data" = ["*.csv"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+extend-exclude = ["papers"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+    "N",    # pep8-naming
+    "D",    # pydocstyle (Google convention, see below)
+    "ANN",  # type annotations on all functions
+    "SIM",  # flake8-simplify
+    "NPY",  # NumPy-specific rules
+    "PT",   # pytest style
+    "RUF",  # ruff-specific rules
+]
+ignore = [
+    "E501",    # line length is enforced by black
+    "ANN401",  # `Any` is legitimate for parsed YAML configuration values
+    "D105",    # magic methods need no docstring
+    "D107",    # Google style documents __init__ arguments in the class docstring
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "ANN"]
+# Report text uses typographic minus signs and primes (−6 dB, s′).
+"scripts/study_report.py" = ["RUF001"]
+"scripts/paper_figures.py" = ["RUF001"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "gpu: requires a CUDA device (skipped automatically when none is available)",
+    "data: requires the MIMII dataset on disk (skipped automatically when absent)",
+    "slow: long-running test",
+]

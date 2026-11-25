@@ -1,0 +1,21 @@
+# EAT frozen encoder + kNN. Encoder: EAT-base, epoch 30, pre-trained only (Chen et
+# al., IJCAI 2024), code vendored from worstchan/EAT-base_epoch30_pretrain at the
+# revision below (MIT). Configuration fixed on 2026-09-30 before any embedding was
+# computed (docs/protocol.md, "EAT + kNN configuration"). Deviations:
+# docs/deviations.md.
+checkpoint:
+  repo: worstchan/EAT-base_epoch30_pretrain
+  revision: 6eb95936bf1061cacee1c0b89404a1aca9a3c62a
+  file: model.safetensors
+  sha256: 8623072d09aac4f3ad1168b4fed3a24e4f68fe1da25b9fe733375efb237e5f48
+features:             # preprocessing of the model card, at that revision
+  num_mel_bins: 128   # Kaldi fbank: htk_compat, Hanning window, 25 ms, no dither
+  frame_shift_ms: 10
+  target_length: 1024 # frames; 10 s clips (998 frames) are zero-padded
+  norm_mean: -4.268
+  norm_std: 4.569     # normalized as (fbank - mean) / (2 * std)
+  batch_size: 32      # clips per forward pass (part of the cache identity)
+pooling: time_mean    # main: mean over the 64 time positions of the last-layer
+                      # patch tokens, per frequency position (8 x 768 = 6144)
+k: 1                  # main: distance to the nearest reference embedding
+metric: cosine        # 1 - cosine similarity

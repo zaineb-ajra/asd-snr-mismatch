@@ -1,0 +1,58 @@
+{
+  "stage": "A",
+  "phase6_commit": "14194605c649ba310c21993dd7edff2a9cb9c39b",
+  "head_at_check": "14194605c649ba310c21993dd7edff2a9cb9c39b",
+  "checks": {
+    "C1": {
+      "n": 72,
+      "failed": 0,
+      "failures": []
+    },
+    "C10": {
+      "n": 60,
+      "failed": 0,
+      "failures": []
+    },
+    "C2": {
+      "n": 72,
+      "failed": 0,
+      "failures": []
+    },
+    "C3": {
+      "n": 72,
+      "failed": 0,
+      "failures": []
+    },
+    "C4": {
+      "n": 72,
+      "failed": 0,
+      "failures": []
+    },
+    "C5": {
+      "n": 72,
+      "failed": 0,
+      "failures": []
+    },
+    "C6": {
+      "n": 24,
+      "failed": 0,
+      "failures": []
+    },
+    "C7": {
+      "n": 72,
+      "failed": 0,
+      "failures": []
+    },
+    "C8": {
+      "n": 2,
+      "failed": 0,
+      "failures": []
+    },
+    "C9": {
+      "n": 9,
+      "failed": 0,
+      "failures": []
+    }
+  },
+  "passed": true
+}

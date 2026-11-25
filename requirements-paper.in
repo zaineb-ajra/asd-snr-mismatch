@@ -1,0 +1,11 @@
+# Minimal runtime dependencies to regenerate Table 1 and Figure 1 of the paper
+# from results/aggregated/ (no GPU, no PyTorch). Pinned set in requirements-paper.txt,
+# regenerated with the versions of requirements.txt:
+#   uv pip compile requirements-paper.in -c requirements.txt --python-version 3.10 \
+#       -o requirements-paper.txt
+numpy
+scipy
+pandas
+scikit-learn
+pyyaml
+matplotlib

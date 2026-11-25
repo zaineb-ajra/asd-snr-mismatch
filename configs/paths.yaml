@@ -1,0 +1,11 @@
+# Storage locations. Relative paths are resolved against the repository root.
+#
+# Machine-specific overrides (take precedence over this file, key by key):
+#   1. the YAML file named by the NOISEMISMATCH_PATHS environment variable, or
+#   2. configs/paths.local.yaml (git-ignored), if it exists.
+#
+# Disk budget for the full study: ~100 GB of MIMII archives, ~250 GB of extracted
+# audio (estimate, confirmed in docs/data.md once extracted) plus the feature cache.
+data_root: work/data       # MIMII archives (downloads/) and extracted audio
+cache_root: work/cache     # cached input features
+output_root: work/outputs  # per-run outputs: result files, per-clip scores, logs

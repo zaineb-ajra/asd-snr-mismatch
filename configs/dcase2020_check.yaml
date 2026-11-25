@@ -1,0 +1,23 @@
+# OS-SCL diagnostic on the DCASE 2020 Task 2 split (MIMII part), decided on
+# 2026-10-05, AFTER the study results (docs/validation.md, "OS-SCL: diagnostic on
+# the DCASE 2020 split"). Fixed before any run; the study results do not change
+# whatever its outcome.
+seed: 0
+snr_db: -6                      # the MIMII part of DCASE 2020 is MIMII at -6 dB, channel 0
+published_mean_auc: 0.9853      # Huang et al. 2025, Table II, TFSTgram (OS-SCL): mean of fan, pump, slider, valve
+tolerance_auc: 0.03             # criterion: |mean of the four types - 0.9853| <= 0.03
+arms:
+  A:                            # the study configuration, code unchanged
+    model: osscl
+    overrides: {}
+  B:                            # the four values of the huangswt/OS-SCL repository (docs/deviations.md)
+    model: osscl
+    overrides:
+      logmel_n_fft: 2048        # log-Mel window 2048 (the Tgram keeps 1024)
+      log_scale: db             # decibels instead of the natural log
+      mobilefacenet: repository # three bottleneck sequences
+      score_margin: true        # anomaly score: cross-entropy with the margin
+      ema_decay: 0.9999         # fixed decay instead of the converted one
+  control:                      # Wilkinghoff, no criterion
+    model: wilkinghoff
+    overrides: {}

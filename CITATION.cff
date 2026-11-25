@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this code or its data tables, please cite the accompanying paper."
+title: "noisemismatch: train/test SNR mismatch in unsupervised anomalous sound detection"
+type: software
+version: 1.0.0
+license: MIT
+authors:
+  - family-names: "Ajra"
+    given-names: "Zaineb"
+  - family-names: "Daou"
+    given-names: "Andrea"
+repository-code: "https://github.com/zaineb-ajra/asd-snr-mismatch"
+keywords:
+  - anomalous sound detection
+  - machine condition monitoring
+  - signal-to-noise ratio
+  - domain shift
+  - MIMII
+preferred-citation:
+  type: conference-paper
+  title: "Détection non supervisée de sons anormaux : effet d'un décalage de rapport signal sur bruit entre entraînement et test"
+  authors:
+    - family-names: "Ajra"
+      given-names: "Zaineb"
+    - family-names: "Daou"
+      given-names: "Andrea"
+  conference:
+    name: "Extraction et Gestion des Connaissances (EGC 2027)"
+  collection-title: "Revue des Nouvelles Technologies de l'Information (RNTI)"
+  notes: "to appear"
+  year: 2027
+  languages:
+    - fr

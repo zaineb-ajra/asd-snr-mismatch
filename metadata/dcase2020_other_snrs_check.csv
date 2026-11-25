@@ -1,0 +1,9 @@
+machine_type,snr_db,n_mimii_files,n_distinct_crc32,n_dcase_files,n_matching_dcase,matching_members
+fan,0,5550,5550,5550,0,
+fan,6,5550,5550,5550,0,
+pump,0,4205,4205,4205,0,
+pump,6,4205,4205,4205,0,
+slider,0,4094,4094,4094,0,
+slider,6,4094,4094,4094,0,
+valve,0,4170,4170,4170,0,
+valve,6,4170,4170,4170,0,

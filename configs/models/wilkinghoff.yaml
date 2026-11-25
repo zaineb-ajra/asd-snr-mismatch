@@ -1,0 +1,23 @@
+# Wilkinghoff "proposed approach" (ICASSP 2024), re-implemented from the author's
+# articles (docs/deviations.md: source of every element). Study setting (MIMII);
+# the fidelity runs override input_length per dataset (docs/protocol.md).
+input_length: 160000       # 10 s at 16 kHz (MIMII, DCASE 2022); DCASE 2023: 288000
+n_fft: 1024                # magnitude STFT, Hann window, no padding
+hop: 512
+embedding_dim: 128         # per branch; concatenated: 256
+spectrum_kernels: [256, 64, 16]
+spectrum_strides: [64, 32, 4]   # second stride: see deviations.md (written 16, sizes imply 32)
+spectrum_channels: 128
+n_subclusters: 16
+epochs: 10
+batch_size: 64
+learning_rate: 1.0e-3      # TensorFlow Adam default
+adam_betas: [0.9, 0.999]
+adam_eps: 1.0e-7
+bn_eps: 1.0e-3             # TensorFlow batch-norm defaults
+bn_momentum: 1.0e-2        # PyTorch convention for Keras momentum 0.99
+mixup_prob: 0.5
+statex_prob: 0.5
+featex_prob: 0.5
+statex_eps: 1.0e-12        # open point (deviations.md)
+kmeans_clusters: 16

@@ -1,0 +1,90 @@
+# Experimental protocol shared by all models. Rationale and definitions: docs/protocol.md.
+# Dataset facts (machine IDs, channel, sampling rate, ...) are added in Phase 1, once
+# verified on the downloaded files.
+
+dataset:
+  name: MIMII
+  zenodo_record: 3384388
+  machine_types: [fan, pump, slider, valve]
+  snrs_db: [-6, 0, 6]
+  # Removed from every analysis (training and test, all models, auxiliary ID
+  # classes included): no anomalous clip is identifiable across SNRs.
+  excluded_machine_ids:
+    - {machine_type: valve, machine_id: id_00}
+
+identity:
+  # Content-based clip identity (docs/protocol.md, "Clip identity"); fixed
+  # 2026-09-29 before any exclusion count was computed.
+  reference_snr_db: 0
+  score: mean_channel_pearson_lag0
+  min_score: 0.10          # tau
+  min_margin: 0.05         # delta, against the best competitor in row and column
+  min_support_m6: 0.05     # each of the two terms of the -6 dB score
+  keep_if_matched_at_db: [6, -6]
+
+split:
+  # Per (machine type, machine ID): the test set holds every anomalous clip plus
+  # (as nearly as clusters allow) the same number of normal clips, added cluster by
+  # cluster in an order drawn with this seed; the other normal clips form the
+  # training set. Defined on content-based identities (same at every SNR),
+  # generated once and frozen in a versioned CSV. See docs/protocol.md.
+  seed: 12345
+  # Cluster rule withdrawn by Amendment 1 (docs/protocol.md, 2026-09-29): the
+  # split is drawn per identity. Was 0.5 (commit 119b1a4).
+  cluster_min_score_p6: null
+  # Noise reuse check before saving the split: share of test files sharing a
+  # noise segment (same-SNR score >= min_score) with a training file, normal vs
+  # anomalous; stop for review if they differ by >= max_difference.
+  noise_check:
+    min_score: 0.5
+    max_difference: 0.05
+
+training:
+  seeds: [0, 1, 2]
+  # Training conditions. "multi" trains on the union of all SNRs of the same
+  # training clips (Experiment 2).
+  conditions:
+    - {name: m6dB, train_snrs_db: [-6]}
+    - {name: 0dB, train_snrs_db: [0]}
+    - {name: p6dB, train_snrs_db: [6]}
+    - {name: multi, train_snrs_db: [-6, 0, 6]}
+  # The multi-condition model gets the same number of optimization steps as the
+  # single-SNR model of the same method (only noise diversity changes).
+  multi_condition_budget: same_steps
+
+evaluation:
+  test_snrs_db: [-6, 0, 6]
+  # pAUC = sklearn.metrics.roc_auc_score(y, s, max_fpr=0.1) (McClish-standardized,
+  # as in the DCASE evaluators). See docs/protocol.md, "Metrics".
+  pauc_max_fpr: 0.1
+  # Per-group 95 % confidence interval on AUC: stratified bootstrap of test clips.
+  bootstrap:
+    n_resamples: 1000
+    confidence: 0.95
+    stratified_by_label: true
+    seed: 2026
+  # Strict identity variant (evaluation only; Amendment 2): test identities are
+  # removed at every SNR if a column below is false / true in the identity table.
+  strict_variant:
+    exclude_if_false: [m6_argmax_agree]
+    exclude_if_true: [p6_below_null_p999, m6_below_null_p999]
+
+sensitivity:
+  # Separate 2x2 experiment on all clips identifiable between 0 and +6 dB
+  # (accepted +6 dB match; excluded machine IDs removed), own cluster split with
+  # the same procedure and seed.
+  snrs_db: [0, 6]
+  identities: p6_accepted
+
+aggregation:
+  # Per machine ID -> arithmetic mean over IDs (per machine type) -> arithmetic
+  # mean over machine types. Delta-AUC is computed seed by seed (seed k vs seed k),
+  # then reported as mean and sample standard deviation over seeds.
+  over_ids: arithmetic_mean
+  over_machine_types: arithmetic_mean
+  seed_std_ddof: 1
+  # Robustness aggregations (Amendment 2): same per-ID results, re-averaged
+  # without these machine IDs; reported next to the main results.
+  robustness:
+    - name: fan_without_id_00
+      drop: [{machine_type: fan, machine_id: id_00}]

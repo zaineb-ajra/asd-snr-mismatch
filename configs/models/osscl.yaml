@@ -1,0 +1,21 @@
+# OS-SCL, TFSTgram (OS-SCL) variant (Huang et al., ICASSP 2025), re-implemented from
+# the paper and the papers it cites (docs/deviations.md: source level of every value).
+n_mels: 128            # STgram-MFN: M = 128
+n_fft: 1024            # STgram-MFN: W = 1024 (repository: 2048; the cited paper takes precedence)
+hop: 512               # STgram-MFN: H = 512 -> 128 x 313 (OS-SCL: 128 x 313)
+log_eps: 1.0e-8        # not given anywhere (our choice)
+embedding_dim: 128     # OS-SCL
+fph_dim: 64            # OS-SCL: R = 64
+arcface_scale: 30.0    # OS-SCL
+arcface_margin: 0.4    # OS-SCL (TFSTgram)
+temperature: 0.02      # OS-SCL
+mixup_alpha: 0.5       # OS-SCL: Beta(0.5, 0.5)
+epochs: 300            # OS-SCL
+batch_size: 64         # OS-SCL
+learning_rate: 1.0e-4  # OS-SCL (AdamW, cosine annealing)
+weight_decay: 1.0e-2   # repository fact (PyTorch AdamW default)
+eta_min_ratio: 0.1     # repository fact (eta_min = 0.1 * learning rate, T_max = epochs)
+ema_window_fraction: 0.061843  # EMA window as a fraction of the run's steps: 10,000 of the
+                       # authors' 161,700 (repository decay 0.9999); decay = 1 - 1 / (fraction x
+                       # steps of the run): 0.99961 for 41,400 steps (docs/deviations.md, O-EMA)
+ema_weight_decay: 2.0e-6  # repository fact (0.02 * 1e-4 per EMA step)

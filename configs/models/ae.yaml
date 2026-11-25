@@ -1,0 +1,18 @@
+# Autoencoder of the MIMII baseline (Purohit et al., 2019, Sec. 4; code:
+# MIMII-hitachi/mimii_baseline baseline.py / baseline.yaml, commit 7086d21).
+# Deviations and unstated framework defaults: docs/deviations.md, "Autoencoder".
+features:              # log-mel, librosa 0.6.0 defaults of the baseline
+  n_mels: 64
+  n_fft: 1024
+  hop_length: 512
+  power: 2.0
+  pad_mode: reflect    # librosa 0.6.0 stft default (checked in its source)
+  norm: slaney         # librosa 0.6.0 filters.mel(norm=1)
+frames: 5              # consecutive frames concatenated: 5 x 64 = 320 inputs
+hidden_units: [64, 64, 8, 64, 64]
+epochs: 50
+batch_size: 512
+validation_split: 0.0  # original 0.1 (Keras: last 10 % in file order); 0.0 per deviation A6
+learning_rate: 0.001   # Keras 2.1.6 Adam defaults
+adam_betas: [0.9, 0.999]
+adam_eps: 1.0e-7

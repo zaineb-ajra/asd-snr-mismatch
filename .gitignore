@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# Virtual environments (may be a symlink to another disk)
+.venv
+venv/
+
+# Machine-specific storage paths (see configs/paths.yaml) and local secrets
+configs/paths.local.yaml
+.env
+
+# Default local storage root (see configs/paths.yaml)
+/work/
+
+# Reference papers: arXiv preprints kept for local reference only, not redistributed
+papers/*.pdf
+
+# Results: only the final aggregates are versioned
+/results/*
+!/results/README.md
+!/results/aggregated/
+!/results/tables/
+!/results/figures/
+!/results/paper/
+!/results/verification/
+!/results/phase6/
+!/results/study_report.md
+!/results/dcase2020_check.md
+
+# Logs
+*.log
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store

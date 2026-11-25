@@ -1,0 +1,22 @@
+# MobileNetV2 machine-ID classifier of the DCASE 2022 Task 2 baseline
+# (Kota-Dohi/dcase2022_task2_baseline_mobile_net_v2, commit aaf3932: baseline.yaml,
+# keras_model.py, 00_train.py, 01_test.py). Deviations: docs/deviations.md.
+features:            # log-mel, librosa 0.9.1 defaults of the baseline
+  n_mels: 128
+  n_fft: 1024
+  hop_length: 512
+  power: 2.0
+  pad_mode: constant # librosa 0.9.1 stft default (checked in its source)
+  norm: slaney
+  log_floor: max     # 20 / power * log10(max(mel, eps))
+n_frames: 64         # frames per image
+n_hop_frames: 8      # training: one window out of 8; scoring: all windows
+alpha: 0.5           # MobileNetV2 width multiplier
+bn_eps: 1.0e-3       # Keras MobileNetV2 batch norm
+bn_momentum: 1.0e-3  # PyTorch convention for the Keras momentum 0.999
+epochs: 20
+batch_size: 32
+learning_rate: 1.0e-5
+adam_betas: [0.9, 0.999]
+adam_eps: 1.0e-7     # tf.keras Adam default
+validation_split: 0.0  # original 0.1; 0.0 in the study (as deviation A6)

@@ -1,0 +1,60 @@
+# Huang et al., ICASSP 2025 (arXiv:2509.13853v2), Table II: AUC and pAUC (%) on the test data of the
+# DCASE 2020 Task 2 development dataset (its MIMII part, fan/pump/slider/valve, corresponds to channel 0 of the MIMII recordings at -6 dB; docs/data.md).
+# Transcribed on 2026-10-04 from papers/huang2025_osscl.pdf. 'reference' is the bracketed reference of the table.
+system,reference,machine_type,auc,pauc
+IDNN,1,fan,67.71,52.90
+IDNN,1,pump,73.76,61.07
+IDNN,1,slider,86.45,67.58
+IDNN,1,valve,84.09,64.94
+IDNN,1,ToyCar,78.69,69.22
+IDNN,1,ToyConveyor,71.07,59.70
+IDNN,1,average,76.96,62.57
+MobileNetV2,4,fan,80.19,74.40
+MobileNetV2,4,pump,82.53,76.50
+MobileNetV2,4,slider,95.27,85.22
+MobileNetV2,4,valve,88.65,87.98
+MobileNetV2,4,ToyCar,87.66,85.92
+MobileNetV2,4,ToyConveyor,69.71,56.43
+MobileNetV2,4,average,84.34,77.74
+Glow Aff,2,fan,74.90,65.30
+Glow Aff,2,pump,83.40,73.80
+Glow Aff,2,slider,94.60,82.80
+Glow Aff,2,valve,91.40,75.00
+Glow Aff,2,ToyCar,92.20,84.10
+Glow Aff,2,ToyConveyor,71.50,59.00
+Glow Aff,2,average,85.20,73.90
+STgram-MFN,3,fan,89.31,83.71
+STgram-MFN,3,pump,93.54,85.08
+STgram-MFN,3,slider,99.58,97.82
+STgram-MFN,3,valve,99.18,96.45
+STgram-MFN,3,ToyCar,95.15,90.06
+STgram-MFN,3,ToyConveyor,73.62,62.01
+STgram-MFN,3,average,91.73,85.86
+CLP-SCF,7,fan,96.98,93.23
+CLP-SCF,7,pump,94.97,87.39
+CLP-SCF,7,slider,99.57,97.73
+CLP-SCF,7,valve,99.89,99.51
+CLP-SCF,7,ToyCar,95.85,90.19
+CLP-SCF,7,ToyConveyor,75.21,62.79
+CLP-SCF,7,average,93.75,88.48
+TASTgram(NAMix),13,fan,98.10,94.97
+TASTgram(NAMix),13,pump,94.51,85.22
+TASTgram(NAMix),13,slider,99.49,97.30
+TASTgram(NAMix),13,valve,99.95,99.72
+TASTgram(NAMix),13,ToyCar,96.19,89.96
+TASTgram(NAMix),13,ToyConveyor,76.26,66.95
+TASTgram(NAMix),13,average,94.08,89.01
+Log-Mel(OS-SCL),,fan,95.66,88.59
+Log-Mel(OS-SCL),,pump,94.34,85.80
+Log-Mel(OS-SCL),,slider,99.55,97.64
+Log-Mel(OS-SCL),,valve,99.83,99.09
+Log-Mel(OS-SCL),,ToyCar,96.83,90.44
+Log-Mel(OS-SCL),,ToyConveyor,81.64,68.97
+Log-Mel(OS-SCL),,average,94.64,88.42
+TFSTgram(OS-SCL),,fan,98.41,94.50
+TFSTgram(OS-SCL),,pump,96.25,88.74
+TFSTgram(OS-SCL),,slider,99.63,98.04
+TFSTgram(OS-SCL),,valve,99.85,99.23
+TFSTgram(OS-SCL),,ToyCar,96.55,91.17
+TFSTgram(OS-SCL),,ToyConveyor,83.56,69.87
+TFSTgram(OS-SCL),,average,95.71,90.23

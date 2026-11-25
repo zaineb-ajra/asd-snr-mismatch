@@ -1,0 +1,8 @@
+filename,snr_db,machine_type,size_bytes,md5
+eval_data_ToyCar_test.zip,0,ToyCar,157227729,3c52961e75d60623a40b9dcc47ec1009
+eval_data_ToyTrain_test.zip,0,ToyTrain,151490331,7df19e597a47b7cc1028969b6330be0f
+eval_data_bearing_test.zip,0,bearing,138947389,47518a98084260c11fa61ce9a0c54b7c
+eval_data_fan_test.zip,0,fan,148013423,5b1398524c46a67badf5e94b903c3d84
+eval_data_gearbox_test.zip,0,gearbox,150902926,768c162d3d2bb5147127a2965d54c2ca
+eval_data_slider_test.zip,0,slider,153610331,b2901b49bc001d6446d470260d32db64
+eval_data_valve_test.zip,0,valve,137774117,372c723bb3112340a880c282f5171775

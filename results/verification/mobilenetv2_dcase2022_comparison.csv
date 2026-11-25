@@ -1,0 +1,11 @@
+machine_type,section,metric,published_mean,published_std,our_mean,our_std,difference,agrees
+slider,00,auc_source,87.150,2.710,84.552,6.486,-2.598,True
+valve,02,auc_source,76.260,1.020,77.164,1.008,0.904,True
+valve,02,auc_target,78.740,2.640,79.752,1.833,1.012,True
+ToyCar,00,pauc,49.960,2.560,50.421,0.719,0.461,True
+ToyCar,01,pauc,50.920,2.520,51.589,1.688,0.669,True
+ToyTrain,00,pauc,50.250,1.490,49.758,0.415,-0.492,True
+fan,02,pauc,65.140,1.090,65.105,0.535,-0.035,True
+slider,01,pauc,48.210,2.730,48.232,0.672,0.022,True
+slider,02,pauc,49.690,1.630,49.316,0.580,-0.374,True
+valve,02,pauc,85.740,0.080,85.484,0.654,-0.256,True
